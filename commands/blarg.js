@@ -1,3 +1,3 @@
-const blarg = args => msg.reply("Yes that is my name");
+const blarg = ({msg}) => msg.reply("Yes that is my name");
 
-export default blarg;
+module.exports = blarg;

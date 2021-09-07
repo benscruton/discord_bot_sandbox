@@ -1,18 +1,18 @@
-import ping from "./ping";
-import blarg from "./blarg";
-
 const commands = {
-  ping,
-  blarg,
+  ping: require("./ping"),
+  log: require("./log"),
+  blarg: require("./blarg"),
+  say: require("./say"),
+  things: require("./things"),
+  clear: require("./clear"),
 };
 
-const commandNames = [
-  "ping",
-  "blarg",
-];
+const commandNames = [];
+for(let name in commands){
+  commandNames.push(name);
+}
 
-export default commands;
-
-export {
+module.exports = {
+  commands,
   commandNames
 };
