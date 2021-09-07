@@ -2,9 +2,11 @@ const commands = {
   ping: require("./ping"),
   log: require("./log"),
   blarg: require("./blarg"),
-  say: require("./say"),
   things: require("./things"),
+  say: require("./say"),
+  shout: require("./shout"),
   clear: require("./clear"),
+  quiet: require("./quiet"),
 };
 
 const commandNames = [];

@@ -1,4 +1,4 @@
-const say = ({msg, args, state, setState}) => {
+const shout = ({msg, args, state, setState}) => {
   let newState = JSON.parse(JSON.stringify(state));
   if(!newState.thingsSaid){
     newState.thingsSaid = {};
@@ -9,11 +9,11 @@ const say = ({msg, args, state, setState}) => {
       :
       []
   );
-  let thingSaid = args.join(" ");
-  theirThings.push(thingSaid);
+  let thingShouted = args.join(" ").toUpperCase();
+  theirThings.push(thingShouted);
   newState.thingsSaid[msg.author.id] = theirThings;
   setState(newState);
-  msg.react(thingSaid === thingSaid.toUpperCase() ? "📣" : "👍");
+  msg.react("📣");
 };
 
-module.exports = say;
+module.exports = shout;
