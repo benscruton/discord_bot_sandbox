@@ -1,5 +1,7 @@
-const clear = ({msg, resetThings}) => {
-  resetThings(msg.author.id);
+const clear = ({msg, state, setState}) => {
+  newState = JSON.parse(JSON.stringify(state));
+  newState.thingsSaid[msg.author.id] = [];
+  setState(newState);
   msg.react("🆗");
 };
 

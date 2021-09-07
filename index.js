@@ -8,19 +8,19 @@ client.on("ready", () =>
   console.log(`Logged in as ${client.user.tag}`)
 );
 
-const thingsSaid = {};
+let state = {};
+
+const setState = newState => {
+  state = newState;
+}
 
 const {commands, commandNames} = require("./commands");
-
-const resetThings = id => {
-  thingsSaid[id] = [];
-}
 
 client.on("messageCreate", msg => {
   if(msg.content[0] === "!"){
     const [cmd, ...args] = msg.content.substring(1).split(" ");
     if(commandNames.includes(cmd)){
-      commands[cmd]({msg, args, thingsSaid, resetThings, client});
+      commands[cmd]({msg, args, state, setState, client});
     }
   }
 });

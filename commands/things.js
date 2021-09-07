@@ -1,7 +1,12 @@
-const things = ({msg, thingsSaid, client}) => {
+const things = ({msg, state, client}) => {
   const channel = client.channels.cache.get(msg.channelId);
-  const theirThings = thingsSaid[msg.author.id];
-  if(!theirThings || !theirThings.length){
+  const theirThings = (
+    state.thingsSaid.hasOwnProperty(msg.author.id) ?
+      state.thingsSaid[msg.author.id]
+      :
+      []
+  );
+  if(!theirThings.length){
     channel.send(`${msg.author.username} hasn't said any things.`);
     return;
   }

@@ -30,6 +30,7 @@ const log = ({msg, args, client}) => {
       msg.react("❌");
       return;
     };
+    console.log(typeof thing);
     msg.reply(`Its type is: ${typeof thing}`);
   }
   else{
