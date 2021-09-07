@@ -8,10 +8,11 @@ client.on("ready", () =>
   console.log(`Logged in as ${client.user.tag}`)
 );
 
-const thingsSaid = [];
+const thingsSaid = {};
 
 const commands = [
   "ping",
+  "log",
   "blarg",
   "say",
   "things",
@@ -22,37 +23,86 @@ const ping = (msg, args) => {
   if(!args.length) msg.reply("Pong!");
 };
 
+const log = (msg, args) => {
+  if(!args.length){
+    msg.react("❌");
+    return;
+  }
+
+  const [key, ...extras] = args;
+
+  if(key === "message"){
+    console.log(msg);
+    msg.react("📝");
+  }
+  else if(key === "author"){
+    console.log(msg.author);
+    msg.react("💁‍♀️");
+  }
+  else if(key === "channel"){
+    const channel = client.channels.cache.get(msg.channelId);
+    console.log(channel);
+    msg.react("📺");
+  }
+  else if(key === "type"){
+    let thing = msg;
+    try{
+      while(extras.length){
+        thing = thing[extras.shift()];
+      }
+    } catch {
+      console.log(`The message "${args.join(" ")}" caused an error.`)
+      msg.react("❌");
+      return;
+    };
+    msg.reply(`Its type is: ${typeof thing}`);
+  }
+  else{
+    console.log(args[0]);
+  }
+};
+
 const blarg = msg => msg.reply("Yes that is my name");
 
 const say = (msg, args) => {
+  if(!thingsSaid.hasOwnProperty(msg.author.id)){
+    thingsSaid[msg.author.id] = [];
+  }
   let thingSaid = args.join(" ");
-  thingsSaid.push(thingSaid);
+  thingsSaid[msg.author.id].push(thingSaid);
   msg.react("👍");
 };
 
 const things = (msg) => {
   const channel = client.channels.cache.get(msg.channelId);
-  channel.send(
-    thingsSaid.length ? "here are some things:" : "You haven't said any things."
-  );
-  for(let i=0; i<thingsSaid.length; i++){
-    channel.send(thingsSaid[i]);
+  const theirThings = thingsSaid[msg.author.id];
+  if(!theirThings || !theirThings.length){
+    channel.send(`${msg.author.username} hasn't said any things.`);
+    return;
   }
+  channel.send(`Here are the things ${msg.author.username} has said:`);
+  let things = "";
+  for(let i=0; i<theirThings.length; i++){
+    things += theirThings[i];
+    if(i+1 !== theirThings.length){
+      things += "\n";
+    }
+  }
+  channel.send(things);
 };
 
 const clear = (msg) => {
-  while(thingsSaid.length){
-    thingsSaid.pop();
-  }
+  thingsSaid[msg.author.id] = [];
   msg.react("🆗");
 };
 
 const actions = {
   ping,
+  log,
   blarg,
   say,
   things,
-  clear
+  clear,
 };
 
 client.on("messageCreate", msg => {
