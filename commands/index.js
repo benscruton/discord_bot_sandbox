@@ -1,5 +1,7 @@
 const commands = {
   ping: require("./ping"),
+  help: require("./help"),
+  prefix: require("./prefix"),
   log: require("./log"),
   blarg: require("./blarg"),
   things: require("./things"),
