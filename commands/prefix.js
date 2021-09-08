@@ -1,9 +1,13 @@
-const prefix = ({msg, args, state, setState}) => {
+const prefix = ({msg, state, setState}) => {
+  const newPrefix = msg.content.substring(state.prefix.length + 7);
+  if(!newPrefix.length){
+    msg.react("❌");
+    return;
+  }
   const newState = JSON.parse(JSON.stringify(state));
-  const newPrefix = args.join(" ");
   newState.prefix = newPrefix;
   setState(newState);
-  msg.reply(`Your new prefix is ${newPrefix}`);
+  msg.react("🌵");
 };
 
 module.exports = prefix;

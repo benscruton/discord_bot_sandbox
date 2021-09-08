@@ -1,4 +1,4 @@
-const log = ({msg, args, client}) => {
+const log = ({msg, args, client, state}) => {
   if(!args.length){
     msg.react("❌");
     return;
@@ -18,6 +18,9 @@ const log = ({msg, args, client}) => {
     const channel = client.channels.cache.get(msg.channelId);
     console.log(channel);
     msg.react("📺");
+  }
+  else if(key === "prefix"){
+    console.log(`prefix is: "${state.prefix}"`);
   }
   else if(key === "type"){
     let thing = msg;
