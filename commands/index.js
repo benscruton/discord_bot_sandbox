@@ -9,6 +9,7 @@ const commands = {
   shout: require("./shout"),
   clear: require("./clear"),
   quiet: require("./quiet"),
+  lizard: require("./lizard"),
 };
 
 const commandNames = [];

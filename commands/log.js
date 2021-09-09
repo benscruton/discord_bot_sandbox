@@ -22,6 +22,20 @@ const log = ({msg, args, client, state}) => {
   else if(key === "prefix"){
     console.log(`prefix is: "${state.prefix}"`);
   }
+  else if(key === "burrow"){
+    let thing = msg;
+    try{
+      while(extras.length){
+        thing = thing[extras.shift()];
+      }
+    } catch {
+      console.log(`The message "${args.join(" ")}" caused an error.`)
+      msg.react("❌");
+      return;
+    }
+    console.log(thing);
+    msg.react("🍍");
+  }
   else if(key === "type"){
     let thing = msg;
     try{
