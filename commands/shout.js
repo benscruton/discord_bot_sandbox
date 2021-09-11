@@ -16,4 +16,9 @@ const shout = ({msg, args, state, setState}) => {
   msg.react("📣");
 };
 
-module.exports = shout;
+const description = "Works like 'say' but puts it in all caps";
+
+module.exports = {
+  func: shout,
+  description
+};

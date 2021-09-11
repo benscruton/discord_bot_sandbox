@@ -16,4 +16,9 @@ const say = ({msg, args, state, setState}) => {
   msg.react(thingSaid === thingSaid.toUpperCase() ? "📣" : "👍");
 };
 
-module.exports = say;
+const description = "Adds whatever comes after \"say \" to the user's things said";
+
+module.exports = {
+  func: say,
+  description
+};

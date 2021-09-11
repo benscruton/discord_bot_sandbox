@@ -1,3 +1,8 @@
-const blarg = ({msg}) => msg.reply("Yes that is my name");
+const blarg =  ({msg}) => msg.reply("Yes that is my name");
 
-module.exports = blarg;
+const description = "Responds to the bot's name";
+
+module.exports = {
+  func: blarg,
+  description
+};

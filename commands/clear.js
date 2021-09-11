@@ -8,4 +8,9 @@ const clear = ({msg, state, setState}) => {
   msg.react("🆗");
 };
 
-module.exports = clear;
+const description = "Removes all things a user has said"
+
+module.exports = {
+  func: clear,
+  description
+};

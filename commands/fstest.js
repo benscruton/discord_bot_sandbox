@@ -9,4 +9,9 @@ const fstest = ({msg}) => {
   }
 };
 
-module.exports = fstest;
+const description = "Set up for testing purposes - will react with a frisbee.";
+
+module.exports = {
+  func: fstest,
+  description
+};

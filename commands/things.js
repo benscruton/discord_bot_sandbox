@@ -19,4 +19,9 @@ const things = ({msg, client, state, setState}) => {
   channel.send(things);
 };
 
-module.exports = things;
+const description = "Lists the things that a user has said or shouted";
+
+module.exports = {
+  func: things,
+  description
+};

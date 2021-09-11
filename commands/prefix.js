@@ -10,4 +10,12 @@ const prefix = ({msg, state, setState}) => {
   msg.react("🌵");
 };
 
-module.exports = prefix;
+const description = "Changes the prefix used to introduce bot commands\n" + 
+  "&&&&&" + "|   (does not recognize trailing spaces)\n" + 
+  "&&&&&" + "|   Reacts with a cactus if successful.\n" +
+  "&&&&&" + "|   Note: setting your prefix to '&&&&&' is not recommended."
+
+module.exports = {
+  func: prefix,
+  description
+};

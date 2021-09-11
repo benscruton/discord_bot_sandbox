@@ -21,4 +21,9 @@ const quiet = ({msg, state, setState}) => {
   msg.react("🤫");
 };
 
-module.exports = quiet;
+const description = "Removes all of a user's things that are in all caps";
+
+module.exports = {
+  func: quiet,
+  description
+};

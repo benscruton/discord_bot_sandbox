@@ -14,13 +14,13 @@ const setState = newState => {
   state = newState;
 }
 
-const {commands, commandNames} = require("./commands");
+const commands = require("./commands");
 
 client.on("messageCreate", msg => {
   if(msg.content.substring(0, state.prefix.length) === state.prefix){
     const [cmd, ...args] = msg.content.substring(state.prefix.length).split(" ");
-    if(commandNames.includes(cmd)){
-      commands[cmd]({msg, args, state, setState, client});
+    if(commands.hasOwnProperty(cmd)){
+      commands[cmd].func({msg, args, state, setState, client});
     } else {
       msg.reply("This is not a BlargBot command.  To see a list of valid BlargBot commands, type `!help`.");
     }

@@ -55,4 +55,16 @@ const log = ({msg, args, client, state}) => {
   }
 };
 
-module.exports = log;
+const description = "Logs some things depending on arguments, mostly on the back end.\n" +
+  "&&&&&" + "| Options include:\n" + 
+  "&&&&&" + "|   'message'\n" + 
+  "&&&&&" + "|   'author'\n" +
+  "&&&&&" + "|   'channel'\n" +
+  "&&&&&" + "|   'prefix'\n" +
+  "&&&&&" + "|   'burrow' (chain attributes of msg)\n" + 
+  "&&&&&" + "|   'type' (like 'burrow' but types)"
+
+module.exports = {
+  func: log,
+  description
+};

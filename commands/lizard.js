@@ -7,4 +7,9 @@ const lizard = ({msg, client}) => {
     }).catch( e => console.error(`Something went wrong:\n${e}`));
 };
 
-module.exports = lizard;
+const description = "Mentions a lizard, then reacts with a lizard.";
+
+module.exports = {
+  func: lizard,
+  description
+};
