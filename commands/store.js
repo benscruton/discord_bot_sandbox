@@ -37,8 +37,7 @@ const store = async ({msg, args}) => {
       for(let key in storedItems){
         updatedItems[key] = storedItems[key];
       }
-      await coll.updateOne({userId}, {$set: {storedItems: updatedItems}})
-        .catch(() => setReaction("❌"));
+      await coll.updateOne({userId}, {$set: {storedItems: updatedItems}});
       reaction = "✅";
     }
   }
@@ -52,7 +51,7 @@ const store = async ({msg, args}) => {
   }
 }
 
-const description = "Save things to a Mongo database"
+const description = "Save things to a Mongo database.  Keys and values, separated by spaces."
 
 module.exports = {
   func: store,
