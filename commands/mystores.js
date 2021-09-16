@@ -4,6 +4,8 @@ const dbName = process.env.DB_NAME;
 const connectionString = process.env.DB_CONNECTION;
 
 const mystores = async ({msg, state}) => {
+  const noStores = () => msg.reply(`You do not have any stores in the database.  Use \`${state.prefix}store\` to add items.`);
+
   const userId = msg.author.id;
 
   const connectionOptions = {useNewUrlParser: true, useUnifiedTopology: true };
@@ -20,17 +22,21 @@ const mystores = async ({msg, state}) => {
       .catch(() => setReaction("❌"));
 
     if(!list.length){
-      msg.reply(`You do not have any stores in the database.  Use \`${state.prefix}store\` to add items.`);
-      return;
+      return noStores();
     }
-    const storedItems = list[0].storedItems;
 
-    let output = "Here are your stored items:\n```\n";
+    const storedItems = list[0].storedItems;
+    const keys = [];
     let maxLength = 0;
     for(let key in storedItems){
+      keys.push(key);
       maxLength = Math.max(maxLength, key.length);
     }
-    for(let key in storedItems){
+    if(!keys.length){
+      return noStores();
+    }
+    let output = "Here are your stored items:\n```\n";
+    for(let key of keys){
       let lineIntro = key + ":";
       while(lineIntro.length < maxLength + 3){
         lineIntro += " ";
